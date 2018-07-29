@@ -1,7 +1,9 @@
 from server import app
-from flask import render_template
+from flask import render_template,request
+
 
 @app.route('/')
+@app.route('/index')
 def hello_world():
     return app.send_static_file('index.html')
 
@@ -15,8 +17,33 @@ def page_not_found(error):
 def requests_error(error):
     return app.send_static_file('500.html')
 
-@app.route("/chart1")
-def chart1():
+@app.route('/form', methods=['POST', 'GET'])
+def chart_form():
+    print("chart_form logic")
+    if request.method == 'POST':
+        CountryCode = [request.form['country-1'], request.form['country-2'], request.form['country-3']]
+        indicator1 = request.form['indicator-1']
+        indicator2 = request.form['indicator-2']
+        country1 =  request.form['country-1']
+        country2 = request.form['country-2']
+        country3 = request.form['country-3']
+        startY = request.form['start-year']
+        endY = request.form['end-year']
+        cleanedList = [x for x in CountryCode if str(x) != 'NaN']
+        if(startY == endY and country1 == 'NaN'and country2 == 'NaN'and country3 == 'NaN'and indicator2 == 'NaN'and indicator1 !='NaN'):
+            return pyecharts(indicator1,startY,endY)
+        elif(startY == endY and country1 == 'NaN'and country2 == 'NaN'and country3 == 'NaN'and indicator2 != 'NaN'and indicator1 !='NaN'):
+            return  chart3(indicator1, indicator2,startY,endY)
+        elif ((int(endY) - int(startY)) > 5 and indicator1 != 'NaN' and indicator2 == 'NaN' and (
+                country1 != 'NaN' or country2 != 'NaN' or country3 != 'NaN')):
+            return chart2(indicator1, cleanedList, startY, endY)
+        elif(startY <= endY and indicator1 != 'NaN'and indicator2 == 'NaN'and(country1 != 'NaN'or country2 != 'NaN'or country3 != 'NaN')):
+            return chart1(indicator1,cleanedList,startY,endY)
+
+    return app.send_static_file('chart_form.html')
+
+
+def chart1(indicator1, countryCode, startY, endY):
     import matplotlib
     from io import BytesIO
     import base64
@@ -26,12 +53,7 @@ def chart1():
 
     # mathces = wb.search('gdp.*capita.*const')
 
-    id = 'NY.GDP.PCAP.KD'
-    ct = ['CN','US']
-    st = 2015
-    ed = 2017
-
-    dat = wb.download(indicator= id, country=ct, start=st, end=ed)
+    dat = wb.download(indicator= indicator1, country=countryCode, start=startY, end=endY)
 
     data = dat.unstack()
     print(data)
@@ -54,8 +76,8 @@ def chart1():
     return html.format(data)
     #format的作用是将data填入{}
 
-@app.route("/chart2")
-def chart2():
+
+def chart2(indicator1, countryCode, startY, endY):
     import matplotlib
     from io import BytesIO
     import base64
@@ -77,10 +99,10 @@ def chart2():
 
     # grab indicators above for countires above and load into data frame
 
-    id = 'NY.GNP.PCAP.CD'
-    ct = ['CL', 'UY', 'HU']
-    st = 1990
-    ed = 2010
+    id = indicator1
+    ct = countryCode
+    st = startY
+    ed = endY
     df = wb.download(indicator=id, country=ct, start=st, end=ed)
 
     # df is "pivoted", pandas' unstack fucntion helps reshape it into something plottable
@@ -110,8 +132,8 @@ def chart2():
     return html.format(data)
     #format的作用是将data填入{}
 
-@app.route("/chart3")
-def chart3():
+
+def chart3(indicator1,indicator2, startY, endY):
     import matplotlib
     from io import BytesIO
     import base64
@@ -122,10 +144,10 @@ def chart3():
     import statsmodels.formula.api as smf
 
 
-    ind = ['NY.GDP.PCAP.KD', 'IT.MOB.COV.ZS']
+    ind = [indicator1, indicator2]
     ct = 'all'
-    st = 2011
-    ed = 2011
+    st = startY
+    ed = endY
     dat = wb.download(indicator=ind, country=ct, start=st, end=ed).dropna()
     dat.columns = ['gdp', 'cellphone']
     data = dat.unstack()
@@ -160,8 +182,8 @@ def chart3():
     #format的作用是将data填入{}
 
 
-@app.route("/pyecharts")
-def pyecharts():
+
+def pyecharts(indicator1, startY, endY):
     from pyecharts import Map
     import pandas as pd
     from pandas_datareader import wb
@@ -170,10 +192,10 @@ def pyecharts():
 
     # mathces = wb.search('gdp.*capita.*const')
 
-    startYear = 2015
-    endYear = 2017
+    startYear = startY
+    endYear = endY
     countryCode = 'all'
-    indicatorCode = 'NY.GDP.PCAP.KD'
+    indicatorCode = indicator1
 
     dat = wb.download(indicator=indicatorCode,
                       country=countryCode, start=startYear, end=endYear)
