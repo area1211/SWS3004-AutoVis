@@ -2,10 +2,10 @@ from server import app
 from flask import render_template,request
 
 
+
 @app.route('/')
-@app.route('/index')
 def hello_world():
-    return app.send_static_file('index.html')
+    return app.send_static_file('chart_form.html')
 
 @app.errorhandler(404)
 @app.route("/error404")
@@ -37,7 +37,7 @@ def chart_form():
         elif ((int(endY) - int(startY)) > 5 and indicator1 != 'NaN' and indicator2 == 'NaN' and (
                 country1 != 'NaN' or country2 != 'NaN' or country3 != 'NaN')):
             return chart2(indicator1, cleanedList, startY, endY)
-        elif(startY <= endY and indicator1 != 'NaN'and indicator2 == 'NaN'and(country1 != 'NaN'or country2 != 'NaN'or country3 != 'NaN')):
+        elif(startY <= endY and indicator1 != 'NaN'and(country1 != 'NaN'or country2 != 'NaN'or country3 != 'NaN')):
             return chart1(indicator1,cleanedList,startY,endY)
 
     return app.send_static_file('chart_form.html')
@@ -59,11 +59,10 @@ def chart1(indicator1, countryCode, startY, endY):
     print(data)
     data.plot(kind='bar')
 
-    # 转成图片的步骤
+
     sio = BytesIO()
     plt.savefig(sio, format='png')
     data = base64.encodebytes(sio.getvalue()).decode()
-    print(data)
     html = '''
        <html>
            <body>
@@ -71,10 +70,11 @@ def chart1(indicator1, countryCode, startY, endY):
            </body>
         <html>
     '''
+    picture =  "data:image/png;base64,"+data
+    #print(picture)
     plt.close()
-    # 记得关闭，不然画出来的图是重复的
-    return html.format(data)
-    #format的作用是将data填入{}
+    #return html.format(data)
+    return render_template("home.html",picture = picture)
 
 
 def chart2(indicator1, countryCode, startY, endY):
@@ -111,11 +111,11 @@ def chart2(indicator1, countryCode, startY, endY):
     # a simple matplotlib plot with legend, labels and a title
     dfu.plot();
     plt.legend(loc='best');
-    plt.title("GNI Per Capita ($USD, Atlas Method)");
+    plt.title("Result");
     plt.xlabel('Date');
-    plt.ylabel('GNI Per Capita ($USD, Atlas Method');
+    plt.ylabel('Indicator1');
 
-    # 转成图片的步骤
+
     sio = BytesIO()
     plt.savefig(sio, format='png')
     data = base64.encodebytes(sio.getvalue()).decode()
@@ -127,10 +127,12 @@ def chart2(indicator1, countryCode, startY, endY):
            </body>
         <html>
     '''
+    picture = "data:image/png;base64," + data
+    # print(picture)
     plt.close()
-    # 记得关闭，不然画出来的图是重复的
-    return html.format(data)
-    #format的作用是将data填入{}
+    # return html.format(data)
+    return render_template("home.html", picture=picture)
+
 
 
 def chart3(indicator1,indicator2, startY, endY):
@@ -164,7 +166,7 @@ def chart3(indicator1,indicator2, startY, endY):
     ax.plot(x, y_fitted, 'r--.', label='OLS')
 
 
-    # 转成图片的步骤
+
     sio = BytesIO()
     plt.savefig(sio, format='png')
     data = base64.encodebytes(sio.getvalue()).decode()
@@ -176,10 +178,12 @@ def chart3(indicator1,indicator2, startY, endY):
            </body>
         <html>
     '''
+    picture = "data:image/png;base64," + data
+    # print(picture)
     plt.close()
-    # 记得关闭，不然画出来的图是重复的
-    return html.format(data)
-    #format的作用是将data填入{}
+    # return html.format(data)
+    return render_template("home.html", picture=picture)
+
 
 
 
@@ -208,10 +212,10 @@ def pyecharts(indicator1, startY, endY):
     print(districts)
     areas = data.values[:, 0]
     print(areas)
-    map_1 = Map("Test", width=1200, height=600)
+    map_1 = Map(indicator1, width=1200, height=600)
     map_1.add("", districts, areas, maptype='world', is_visualmap=True, visual_range=[min(areas), max(areas)],
               visual_text_color='#000', is_map_symbol_show=False, is_label_show=False)
-    ret_html=render_template('pyecharts.html',myechart=map_1.render_embed(),mytitle=u"数据演示",
+    ret_html=render_template('pyecharts.html',myechart=map_1.render_embed(),mytitle=u"HeatMap",
                            host=' http://chfw.github.io/jupyter-echarts/echarts',
                            script_list=map_1.get_js_dependencies())
     return ret_html
