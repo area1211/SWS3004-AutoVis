@@ -2,14 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{{mytitle}}</title>
+  <title>Data Insight by VisWorld</title>
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  {% for jsfile_name in script_list %}
-    <script src="{{host}}/{{jsfile_name}}.js"></script>
-    {% endfor %}
-
 </head>
 <body>
 
@@ -138,12 +134,15 @@
 	</div>
   <div class="container">
   <div class="row clearfix">
-    <div class="col-md-12 column">
-           {{myechart|safe}}
+    <div class="col-md-3 column">
+    </div>
+    <div class="col-md-6 column">
+           <img src="{{ picture }}"/>
+    </div>
+    <div class="col-md-3 column">
     </div>
   </div>
 
 
 </body>
 </html>
-
