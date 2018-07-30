@@ -54,7 +54,9 @@ def chart1(indicator1, countryCode, startY, endY):
     from io import BytesIO
     import base64
     import pandas as pd
+    pd.core.common.is_list_like = pd.api.types.is_list_like
     from pandas_datareader import wb
+    matplotlib.use("agg")
     import matplotlib.pyplot as plt
 
     # mathces = wb.search('gdp.*capita.*const')
@@ -88,7 +90,9 @@ def chart2(indicator1, countryCode, startY, endY):
     from io import BytesIO
     import base64
     import pandas as pd
+    pd.core.common.is_list_like = pd.api.types.is_list_like
     from pandas_datareader import wb
+    matplotlib.use("agg")
     import matplotlib.pyplot as plt
 
     # mathces = wb.search('gdp.*capita.*const')
@@ -146,7 +150,9 @@ def chart3(indicator1,indicator2, startY, endY):
     from io import BytesIO
     import base64
     import pandas as pd
+    pd.core.common.is_list_like = pd.api.types.is_list_like
     from pandas_datareader import wb
+    matplotlib.use("agg")
     import matplotlib.pyplot as plt
     import numpy as np
     import statsmodels.formula.api as smf
@@ -195,7 +201,9 @@ def chart4(indicator1,indicator2, Country1, Country2, Country3, startY, endY):
     from io import BytesIO
     import base64
     import pandas as pd
+    pd.core.common.is_list_like = pd.api.types.is_list_like
     from pandas_datareader import wb
+    matplotlib.use("agg")
     import matplotlib.pyplot as plt
     import numpy as np
     import statsmodels.formula.api as smf
@@ -245,7 +253,10 @@ def chart4(indicator1,indicator2, Country1, Country2, Country3, startY, endY):
 def pyecharts(indicator1, startY, endY):
     from pyecharts import Map
     import pandas as pd
+    pd.core.common.is_list_like = pd.api.types.is_list_like
     from pandas_datareader import wb
+    import matplotlib
+    matplotlib.use("agg")
     import matplotlib.pyplot as plt
 
 
@@ -271,8 +282,6 @@ def pyecharts(indicator1, startY, endY):
     map_1.add("", districts, areas, maptype='world', is_visualmap=True, visual_range=[min(areas), max(areas)],
               visual_text_color='#000', is_map_symbol_show=False, is_label_show=False)
     ret_html=render_template('pyecharts.html',myechart=map_1.render_embed(),mytitle=u"HeatMap",
-                           host=' http://chfw.github.io/jupyter-echarts/echarts',
+                           host=' https://chfw.github.io/jupyter-echarts/echarts',
                            script_list=map_1.get_js_dependencies())
     return ret_html
-
-
