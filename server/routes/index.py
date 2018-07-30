@@ -39,8 +39,10 @@ def chart_form():
         elif ((int(endY) - int(startY)) > 5 and indicator1 != 'NaN' and indicator2 == 'NaN' and (
                 country1 != 'NaN' or country2 != 'NaN' or country3 != 'NaN')):
             return chart2(indicator1, cleanedList, startY, endY)
-        elif(startY <= endY and indicator1 != 'NaN'and(country1 != 'NaN'or country2 != 'NaN'or country3 != 'NaN')):
+        elif(startY <= endY and indicator1 != 'NaN'and indicator2 == 'NaN' and (country1 != 'NaN'or country2 != 'NaN'or country3 != 'NaN')):
             return chart1(indicator1,cleanedList,startY,endY)
+        elif (startY <= endY and indicator1 != 'NaN' and indicator2 != 'NaN' and country1 != 'NaN'):
+            return chart4(indicator1, indicator2, country1, country2, country3, startY, endY)
         else:
             return app.send_static_file('chart_form.html')
     else:
@@ -168,6 +170,55 @@ def chart3(indicator1,indicator2, startY, endY):
     fig, ax = plt.subplots(figsize=(8, 6))
     ax.plot(x, y, 'o', label='data')
     ax.plot(x, y_fitted, 'r--.', label='OLS')
+
+
+
+    sio = BytesIO()
+    plt.savefig(sio, format='png')
+    data = base64.encodebytes(sio.getvalue()).decode()
+    print(data)
+    html = '''
+       <html>
+           <body>
+               <img src="data:image/png;base64,{}" />
+           </body>
+        <html>
+    '''
+    picture = "data:image/png;base64," + data
+    # print(picture)
+    plt.close()
+    # return html.format(data)
+    return render_template("home.html", picture=picture)
+
+def chart4(indicator1,indicator2, Country1, Country2, Country3, startY, endY):
+    import matplotlib
+    from io import BytesIO
+    import base64
+    import pandas as pd
+    from pandas_datareader import wb
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import statsmodels.formula.api as smf
+
+    ind = [indicator1, indicator2]
+    st = 2005
+    ed = 2011
+    dat1 = wb.download(indicator=ind, country=Country1, start=st, end=ed)
+    x1 = dat1.values[:, 0]
+    y1 = dat1.values[:, 1]
+    fig, ax = plt.subplots(figsize=(8, 6))
+    ax.plot(x1, y1, 'o', label='data', color='red')
+    if(Country2 != 'NaN'):
+        dat2 = wb.download(indicator=ind, country=Country2, start=st, end=ed)
+        x2 = dat2.values[:, 0]
+        y2 = dat2.values[:, 1]
+        ax.plot(x2, y2, 'o', label='data', color='green')
+    if(Country3 != 'NaN'):
+        dat3 = wb.download(indicator=ind, country=Country3, start=st, end=ed)
+        x3 = dat3.values[:, 0]
+        y3 = dat3.values[:, 1]
+        ax.plot(x3, y3, 'o', label='data', color='yellow')
+
 
 
 
