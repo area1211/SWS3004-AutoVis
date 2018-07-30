@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,20 +9,32 @@
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  
 </head>
 <body>
- <div class="container">
+
+
+<div class="container">
   <div class="row clearfix">
     <div class="col-md-12 column">
       <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">HOME</a>
         </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active">
+               <a href="/form">VisWorld</a>
+            </li>
+          </ul>
+        </div>
       </nav>
     </div>
   </div>
 </div>
- <div class="container">
+
+<div class="container">
 	<div class="row clearfix">
 		<div class="col-md-3 column">
 		</div>
@@ -34,11 +45,12 @@
 			</div>
 			</h1>
 			 <form action="/form" method="POST">
-         <br>
-		 <div class="form-group" style="border: 1px; float: left; width: 50%;">
+
+        <div class="form-group"  style="border: 1px; float: left; width: 50%;">
           <label for="indicator-1">Select indicator 1</label>
           <select class="form-control" id="indicator-1" name="indicator-1">
-             <option value="EG.ELC.ACCS.ZS">Access to electricity (% of population)</option>
+
+            <option value="EG.ELC.ACCS.ZS">Access to electricity (% of population)</option>
             <option value="AG.LND.ARBL.ZS">Arable land(%of land area)</option>
             <option value="SP.DYN.CBRT.IN">Birth rate, crude (per 1,000 people)</option>
             <option value="EN.ATM.CO2E.KT">CO2 emissions(kt)</option>
@@ -47,9 +59,16 @@
             <option value="TX.VAL.TECH.CD">High-technology exports(current US$)</option>
             <option value="SL.TLF.TOTL.IN">Labor force, total</option>
             <option value="SP.POP.TOTL">Population, total</option>
-           </select>
+			<option value="AG.LND.AGRI.ZS">Agricultural land (% of land area)</option>
+			<option value="NE.EXP.GNFS.ZS">Exports of goods and services (% of GDP)</option>
+			<option value="SE.ADT.LITR.ZS">Literacy rate, adult total (% of people ages 15 and above)</option>
+			<option value="EG.IMP.CONS.ZS">Energy imports, net (% of energy use)</option>
+			<option value="FP.CPI.TOTL.ZG">Inflation, consumer prices (annual %)</option>
+
+          </select>
         </div>
-         <div class="form-group" style="border: 1px; float: left; width: 50%;">
+
+        <div class="form-group" style="border: 1px; float: left; width: 50%;">
           <label for="indicator-2">Select indicator 2</label>
           <select class="form-control" id="indicator-2" name="indicator-2">
             <option value="NaN">NaN</option>
@@ -62,9 +81,15 @@
             <option value="TX.VAL.TECH.CD">High-technology exports(current US$)</option>
             <option value="SL.TLF.TOTL.IN">Labor force, total</option>
             <option value="SP.POP.TOTL">Population, total</option>
+			<option value="AG.LND.AGRI.ZS">Agricultural land (% of land area)</option>
+			<option value="NE.EXP.GNFS.ZS">Exports of goods and services (% of GDP)</option>
+			<option value="SE.ADT.LITR.ZS">Literacy rate, adult total (% of people ages 15 and above)</option>
+			<option value="EG.IMP.CONS.ZS">Energy imports, net (% of energy use)</option>
+			<option value="FP.CPI.TOTL.ZG">Inflation, consumer prices (annual %)</option>
           </select>
         </div>
-         <div class="form-group">
+
+        <div class="form-group">
           <label for="country-1">Select country 1</label>
           <select class="form-control" id="country-1" name="country-1">
             <option value="NaN">NaN</option>
@@ -75,11 +100,15 @@
             <option value="DE">Germany</option>
             <option value="IN">India</option>
             <option value="RU">Russia</option>
+			<option value="KR">South Korea</option>
+			<option value="ES">Spain</option>
+			<option value="CL">Chile</option>
             <option value="SG">Singapore</option>
             <option value="US">United States of America</option>
           </select>
         </div>
-         <div class="form-group">
+
+        <div class="form-group">
           <label for="country-2">Select country 2</label>
           <select class="form-control" id="country-2" name="country-2">
             <option value="NaN">NaN</option>
@@ -90,11 +119,15 @@
             <option value="DE">Germany</option>
             <option value="IN">India</option>
             <option value="RU">Russia</option>
+			<option value="KR">South Korea</option>
+			<option value="ES">Spain</option>
+			<option value="CL">Chile</option>
             <option value="SG">Singapore</option>
             <option value="US">United States of America</option>
           </select>
         </div>
-         <div class="form-group">
+
+        <div class="form-group">
           <label for="country-3">Select country 3</label>
           <select class="form-control" id="country-3" name="country-3">
             <option value="NaN">NaN</option>
@@ -105,22 +138,29 @@
             <option value="DE">Germany</option>
             <option value="IN">India</option>
             <option value="RU">Russia</option>
+			<option value="KR">South Korea</option>
+			<option value="ES">Spain</option>
+			<option value="CL">Chile</option>
             <option value="SG">Singapore</option>
             <option value="US">United States of America</option>
           </select>
         </div>
-       	<div class="form-group" style="border: 1px; float: left; width: 50%;"> <!-- Name field -->
+
+      	<div class="form-group" style="border: 1px; float: left; width: 50%;"> <!-- Name field -->
       		<label class="control-label " for="start-year">Start year</label>
-      		<input class="form-control" id="start-year" name="start-year" type="text"/required>
+      		<input class="form-control" id="start-year" name="start-year" type="text" required/>
       	</div>
-       	<div class="form-group" style="border: 1px; float: left; width: 50%;"> <!-- Email field -->
+
+      	<div class="form-group" style="border: 1px; float: left; width: 50%;"> <!-- Email field -->
       		<label class="control-label requiredField" for="end-year">End year</label>
-      		<input class="form-control" id="end-year" name="end-year" type="text"/required>
+      		<input class="form-control" id="end-year" name="end-year" type="text" required/>
       	</div>
-       	<div class="form-group">
+
+      	<div class="form-group">
       		<button class="btn btn-primary " name="submit" type="submit">Submit</button>
       	</div>
-       </form>
+
+      </form>
 		</div>
 		<div class="col-md-3 column">
 		</div>
@@ -135,5 +175,7 @@
     <div class="col-md-3 column">
     </div>
   </div>
- </body>
+
+
+</body>
 </html>
