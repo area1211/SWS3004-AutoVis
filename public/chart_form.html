@@ -2,15 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Data Insight by VisWorld</title>
+  <title>VisWorld</title>
+  <style>
+	h1#a{font-size:150;}
+  </style>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-  <!-- <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-  <!-- <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-  <!-- <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script> -->
+  <!-- <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  
+
 </head>
 <body>
 
@@ -22,6 +28,13 @@
         <div class="navbar-header">
            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">HOME</a>
         </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active">
+               <a href="/form">VisWorld</a>
+            </li>
+          </ul>
+        </div>
       </nav>
     </div>
   </div>
@@ -32,12 +45,14 @@
 		<div class="col-md-3 column">
 		</div>
 		<div class="col-md-6 column">
-			<h3 class="text-center">
-				Data Insight bt VisWorld
-			</h3>
+			<h1 id="a">
+			<div style="text-align:center">
+				Data Insight by VisWorld
+			</div>
+			</h1>
 			 <form action="/form" method="POST">
 
-        <div class="form-group">
+        <div class="form-group"  style="border: 1px; float: left; width: 50%;">
           <label for="indicator-1">Select indicator 1</label>
           <select class="form-control" id="indicator-1" name="indicator-1">
 
@@ -50,11 +65,16 @@
             <option value="TX.VAL.TECH.CD">High-technology exports(current US$)</option>
             <option value="SL.TLF.TOTL.IN">Labor force, total</option>
             <option value="SP.POP.TOTL">Population, total</option>
+			<option value="AG.LND.AGRI.ZS">Agricultural land (% of land area)</option>
+			<option value="NE.EXP.GNFS.ZS">Exports of goods and services (% of GDP)</option>
+			<option value="SE.ADT.LITR.ZS">Literacy rate, adult total (% of people ages 15 and above)</option>
+			<option value="EG.IMP.CONS.ZS">Energy imports, net (% of energy use)</option>
+			<option value="FP.CPI.TOTL.ZG">Inflation, consumer prices (annual %)</option>
 
           </select>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="border: 1px; float: left; width: 50%;">
           <label for="indicator-2">Select indicator 2</label>
           <select class="form-control" id="indicator-2" name="indicator-2">
             <option value="NaN">NaN</option>
@@ -67,6 +87,11 @@
             <option value="TX.VAL.TECH.CD">High-technology exports(current US$)</option>
             <option value="SL.TLF.TOTL.IN">Labor force, total</option>
             <option value="SP.POP.TOTL">Population, total</option>
+			<option value="AG.LND.AGRI.ZS">Agricultural land (% of land area)</option>
+			<option value="NE.EXP.GNFS.ZS">Exports of goods and services (% of GDP)</option>
+			<option value="SE.ADT.LITR.ZS">Literacy rate, adult total (% of people ages 15 and above)</option>
+			<option value="EG.IMP.CONS.ZS">Energy imports, net (% of energy use)</option>
+			<option value="FP.CPI.TOTL.ZG">Inflation, consumer prices (annual %)</option>
           </select>
         </div>
 
@@ -81,6 +106,9 @@
             <option value="DE">Germany</option>
             <option value="IN">India</option>
             <option value="RU">Russia</option>
+			<option value="KR">South Korea</option>
+			<option value="ES">Spain</option>
+			<option value="CL">Chile</option>
             <option value="SG">Singapore</option>
             <option value="US">United States of America</option>
           </select>
@@ -97,6 +125,9 @@
             <option value="DE">Germany</option>
             <option value="IN">India</option>
             <option value="RU">Russia</option>
+			<option value="KR">South Korea</option>
+			<option value="ES">Spain</option>
+			<option value="CL">Chile</option>
             <option value="SG">Singapore</option>
             <option value="US">United States of America</option>
           </select>
@@ -113,19 +144,22 @@
             <option value="DE">Germany</option>
             <option value="IN">India</option>
             <option value="RU">Russia</option>
+			<option value="KR">South Korea</option>
+			<option value="ES">Spain</option>
+			<option value="CL">Chile</option>
             <option value="SG">Singapore</option>
             <option value="US">United States of America</option>
           </select>
         </div>
 
-      	<div class="form-group"> <!-- Name field -->
+      	<div class="form-group" style="border: 1px; float: left; width: 50%;"> <!-- Name field -->
       		<label class="control-label " for="start-year">Start year</label>
-      		<input class="form-control" id="start-year" name="start-year" type="text"/>
+      		<input class="form-control" id="start-year" name="start-year" type="text" required/>
       	</div>
 
-      	<div class="form-group"> <!-- Email field -->
+      	<div class="form-group" style="border: 1px; float: left; width: 50%;"> <!-- Email field -->
       		<label class="control-label requiredField" for="end-year">End year</label>
-      		<input class="form-control" id="end-year" name="end-year" type="text"/>
+      		<input class="form-control" id="end-year" name="end-year" type="text" required/>
       	</div>
 
       	<div class="form-group">
