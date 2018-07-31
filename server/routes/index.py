@@ -209,8 +209,10 @@ def chart4(indicator1,indicator2, Country1, Country2, Country3, startY, endY):
     import statsmodels.formula.api as smf
 
     ind = [indicator1, indicator2]
-    st = 2005
-    ed = 2011
+
+    st = startY
+    ed = endY
+
     dat1 = wb.download(indicator=ind, country=Country1, start=st, end=ed)
     x1 = dat1.values[:, 0]
     y1 = dat1.values[:, 1]
