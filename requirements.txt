@@ -43,7 +43,7 @@ requests-ftp==0.3.1
 scipy==1.1.0
 six==1.11.0
 statsmodels==0.9.0
-urllib3==1.23
+urllib3==1.26.5
 Werkzeug==0.14.1
 wrapt==1.10.11
 WTForms==2.2.1
